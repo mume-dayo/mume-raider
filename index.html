@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Message Sender</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>むめーれいだー</h1>
+
+        <form id="messageForm">
+            <div class="form-group">
+                <label for="tokens">User Tokens (1行に1つ)</label>
+                <textarea id="tokens" placeholder="Tokenを1行ずつ入力..." rows="5" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="channelId">Channel ID</label>
+                <input type="text" id="channelId" placeholder="Channel ID (数字)" required>
+                <button type="button" id="testBtn" style="margin-top: 8px; padding: 8px; font-size: 12px;">チャンネル接続テスト</button>
+            </div>
+
+            <div class="form-group">
+                <label for="sendInterval">送信間隔 (ミリ秒)</label>
+                <input type="number" id="sendInterval" placeholder="500" value="500" min="500" step="1">
+            </div>
+
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" placeholder="送信するメッセージを入力..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="forwardMessageUrl">転送元メッセージURL (オプション)</label>
+                <input type="text" id="forwardMessageUrl" placeholder="discord.com/channels/...">
+            </div>
+
+            <div class="toggle-section">
+                <div class="toggle-header" id="pollToggleHeader">
+                    <div class="toggle-switch" id="pollToggle">
+                        <div class="toggle-slider"></div>
+                    </div>
+                    <span class="toggle-label">投票を作成</span>
+                </div>
+                <div class="poll-content" id="pollContent">
+                    <div class="form-group" style="margin-bottom: 15px;">
+                        <label for="pollQuestion">投票のタイトル</label>
+                        <input type="text" id="pollQuestion" placeholder="質問を入力...">
+                    </div>
+                    <div class="form-group">
+                        <label>選択肢 (最大10個)</label>
+                        <div id="choicesContainer"></div>
+                        <button type="button" id="addChoiceBtn" class="add-choice-btn">+ 選択肢を追加</button>
+                    </div>
+                    <div class="form-group" style="margin-top: 15px;">
+                        <label for="autoVoteChoice">自動投票する選択肢番号 (1-10、0で無効)</label>
+                        <input type="number" id="autoVoteChoice" placeholder="0" value="0" min="0" max="10" step="1">
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" id="sendBtn">送信開始</button>
+            <button type="button" id="stopBtn" style="display: none; background: linear-gradient(135deg, #f04747 0%, #d84040 100%);">停止</button>
+        </form>
+
+        <div class="status" id="status"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
